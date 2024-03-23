@@ -15,5 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    // return $request->user();
+
 });
+
+Route::post("add-job", [App\Http\Controllers\BoardJobController::class, 'store']);
+
+Route::get("show-jobs", [App\Http\Controllers\BoardJobController::class, 'show']);
+
+Route::get("single-job/{id}", [App\Http\Controllers\BoardJobController::class, 'getJob']);
+
+

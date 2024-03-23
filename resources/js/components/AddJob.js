@@ -39,8 +39,6 @@ function AddJob() {
 	    .then(data => console.log(data))
 	    .catch(error => console.error('Error:', error));
 
-	  	// const movies = await response.json();
-		// console.log(movies);
 	}
 
 
