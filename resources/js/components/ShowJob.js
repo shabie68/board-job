@@ -7,12 +7,38 @@ import {
   useParams
 } from "react-router-dom";
 
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import AddJob from './AddJob'
+import SingleJob from './SingleJob'
 
 function ShowJob() {
 
+
 	const [addJob, setAddJob] = useState(false)
+	const [jobs, setJobs] = useState([]);
+	const [job, setJob] = useState(null);
+
+	async function getJobs() {
+	  const response = await fetch('http://127.0.0.1:8000/api/show-jobs');
+	  const _jobs = await response.json();
+	  console.log(_jobs);
+	  setJobs(_jobs.jobs)
+	}
+
+	useEffect(() => {
+		getJobs()
+
+	}, [])
+
+	async function getJob(id) {
+		
+		const response = await fetch('http://127.0.0.1:8000/api/single-job/'+id);
+	  	const _job = await response.json();
+
+	  	setJob(_job.job)
+
+	}
+
 
 	return(
 		<div>
@@ -20,8 +46,44 @@ function ShowJob() {
 
 				<AddJob/>
 				: 
-
 				<div className="d-flex gap-3">
+					<div className="w-40" style={{width: '45%'}}>
+						{jobs.map(job => (
+
+						  <div className="card mb-4" key={"job-"+job.id} style={{cursor: 'pointer'}}
+						  onClick={()=> {getJob(job.id)}}>
+							<h3 className="card-header">{job.title}</h3>
+							<div className="card-body">
+								<p>Will join the startup and design the website for startup. You will work with Eurpean clients</p>
+								<ul>
+									<li><h4>Description:</h4>{job.description}</li>
+									<li><h4>Responsibilities</h4>{job.job_responsibilities}</li>
+									<li><h4>Requirements</h4>{job.job_requirements}</li>
+								</ul>
+							</div>
+						</div>
+						))}
+					</div>
+
+					{job ?
+						<SingleJob job={job} setJob={setJob}/>
+						: ''
+					}
+					
+				</div>
+			}
+		</div>
+
+		 
+		
+	)
+}
+
+export default ShowJob
+
+/**
+
+<div className="d-flex gap-3">
 					<div className="w-40">
 					
 						<div className="card mb-4">
@@ -232,16 +294,4 @@ function ShowJob() {
 							</div>
 						</div>
 					</div>
-		</div>
-
-			}
-			
-
-		</div>
-
-		 
-		
-	)
-}
-
-export default ShowJob
+**/

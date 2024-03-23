@@ -15,6 +15,7 @@ class CreateBoardJobsTable extends Migration
     {
         Schema::create('board_jobs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string("title");
             $table->longText("description");
             $table->string("location");
