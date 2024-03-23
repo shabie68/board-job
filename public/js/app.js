@@ -5221,18 +5221,18 @@ function ShowJob() {
         style: {
           width: '45%'
         },
-        children: jobs.map(function (job) {
+        children: jobs.map(function (_job) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "card mb-4",
+            className: "card mb-4 ".concat((job === null || job === void 0 ? void 0 : job.id) === _job.id ? "border border-primary" : ""),
             style: {
               cursor: 'pointer'
             },
             onClick: function onClick() {
-              getJob(job.id);
+              getJob(_job.id);
             },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
               className: "card-header",
-              children: job.title
+              children: _job.title
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "card-body",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
@@ -5241,23 +5241,23 @@ function ShowJob() {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
                     children: "Description:"
-                  }), job.description]
+                  }), _job.description]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
                     children: "Responsibilities"
-                  }), job.job_responsibilities]
+                  }), _job.job_responsibilities]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
                     children: "Requirements"
-                  }), job.job_requirements]
+                  }), _job.job_requirements]
                 })]
               })]
             })]
-          }, "job-" + job.id);
+          }, "job-" + _job.id);
         })
       }), job ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SingleJob__WEBPACK_IMPORTED_MODULE_2__["default"], {
         job: job,
-        setJob: setJob
+        setAddJob: setAddJob
       }) : '']
     })
   });
@@ -5496,9 +5496,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function SingleJob(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    className: "w-50 position-fixed end-0",
+    className: "w-50 position-sticky end-0",
     style: {
-      top: '80px'
+      top: '80px',
+      alignSelf: 'flex-start'
     },
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "card",
@@ -5530,7 +5531,10 @@ function SingleJob(props) {
           })]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "card-body position-sticky",
+        className: "card-body overflow-auto position-sticky",
+        style: {
+          height: '400px'
+        },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
           children: props === null || props === void 0 ? void 0 : props.job.description
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("strong", {

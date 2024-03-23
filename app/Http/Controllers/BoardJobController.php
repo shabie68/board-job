@@ -11,6 +11,7 @@ class BoardJobController extends Controller
     
     public function store(Request $request) {
 
+        return auth('sanctum')->name;
     	$job = BoardJob::create([
             "user_id" => 1,
     		"title" => $request->title,

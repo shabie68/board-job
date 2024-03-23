@@ -1,7 +1,7 @@
 function SingleJob(props) {
 
 	return (
-		<div className="w-50 position-fixed end-0" style={{top: '80px'}} >
+		<div className="w-50 position-sticky end-0" style={{top: '80px', alignSelf: 'flex-start'}} >
 			<div className="card">
 				<div className="card-header">
 					<h3>{props?.job.title}</h3>
@@ -22,7 +22,7 @@ function SingleJob(props) {
 					</div>
 				</div>
 			
-				<div className="card-body position-sticky">
+				<div className="card-body overflow-auto position-sticky" style={{height: '400px'}}>
 					<p>{props?.job.description}</p>
 
 					<strong>Job Responsibilities</strong>
